@@ -3722,13 +3722,12 @@ definitions:
       id: 1
       name: Development
       description: Development compartment MyApp
-      party: ACustomer
-      pod: AP01
-      subnet: 1.2.3.0
-      mask: 24
-      nos: 24
-      version: 1
-      status: Operational
+      environment: AP01
+      ctype: ACustomer
+      addressing: IPv4
+      numofservers: 24
+      cversion: 1
+      cstatus: Operational
       created: 2018-10-02T10:00:00.00Z
       updated: 2018-10-02T10:00:00.00Z
       lastchange: "Someuser"
@@ -3755,27 +3754,21 @@ definitions:
         example: Some Compartment somewhere
         minLength: 1
         type: string
-      party:
-        description: Name of the contract
-        example: "WillPay" 
+      cversion:
+        description: Description of the version of this environment
         minLength: 1
         type: string
-      pod:
-        description: Name of the VDC
-        example: "AP01" 
-        minLength: 1
-        type: string
-      subnet:
-        description: subnet
+      environment:
+        description: environment
         example: 1.2.3.4
         readOnly: true
         type: string
-      mask:
+      addressing:
         description: subnet in bits
         example: 24
         readOnly: true
         type: string
-      nos:
+      numofservers:
         description: Number of Servers
         example: 1-4 
         minLength: 1
@@ -3784,7 +3777,17 @@ definitions:
         - 10
         - 24
         - 60
-      status:
+      ctype:
+        description: Purpose of the environment
+        type: string
+        example: "DEV" 
+        enum:
+          - P
+          - PA
+          - PAD
+          - AD
+          - D
+      cstatus:
         description: Status of compartment
         example: Operational
         type: string

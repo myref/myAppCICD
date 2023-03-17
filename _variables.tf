@@ -36,18 +36,23 @@ variable "compartments" {
     type = map(object({
             name                = string,
             description         = string,
-            c-type              = string,
-            version             = string,
+            ctype               = string,
+            vdc                 = string,
+            cversion            = string,
+            cstatus             = string,
+            environment         = string,
             created             = string,
             updated             = string,
             last_change         = string,
-            Centercode          = string,
-            Change              = string,
-            View                = string,
-            Management-r        = string,
-            Management-a        = string,
-            Management-i        = string,
-            Developer           = string
+            centercode          = string,
+            change              = string,
+            view                = string,
+            management-r        = string,
+            management-a        = string,
+            management-i        = string,
+            developer           = string,
+            numofservers        = number,
+            addressing           = string
             })            
         )
          

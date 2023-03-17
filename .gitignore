@@ -1,0 +1,7 @@
+.terraform/providers/restportal.services.provider.test/datacenter/onprem/3.0.0/linux_amd64
+.terraform/providers/registry.terraform.io/nbering/ansible/1.0.4/linux_amd64/terraform-provider-ansible_v1.0.4
+.terraform/providers/registry.terraform.io/hashicorp/azurerm/3.48.0/linux_amd64/terraform-provider-azurerm_v3.48.0_x5
+.terraform/providers/registry.terraform.io/hashicorp/azurerm/3.44.1/linux_amd64/terraform-provider-azurerm_v3.44.1_x5
+.terraform/modules/modules.json
+.terraform/terraform.tfstate
+.terraform.lock.hcl
