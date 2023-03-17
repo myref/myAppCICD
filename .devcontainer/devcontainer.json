@@ -1,0 +1,24 @@
+{
+  "dockerFile": "Dockerfile",
+  "remoteUser": "jenkins",
+  "shutdownAction": "stopContainer",
+  // "onCreateCommand": "ansible-galaxy install -r .devcontainer/requirements.yml && pip install -r requirements.txt",
+  "mounts": [
+    "source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/$USER/.ssh,type=bind,consistency=cached"
+  ],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "mhutchie.git-graph",
+        "eamodio.gitlens",
+        "VisualStudioExptTeam.vscodeintellicode",
+        "GitHub.copilot-nightly",
+        "redhat.ansible",
+        "bierner.markdown-mermaid",
+        "docsmsft.docs-markdown",
+        "robocorp.robotframework-lsp"
+      ]
+    }
+  },
+  "runArgs": ["--privileged"]
+}

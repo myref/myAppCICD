@@ -1,13 +1,31 @@
-module "tenant_azure" {
-    source               = "../AppCICD/modules/tenant_azure"
-    count                = var.prov == "Microsoft" ? 1 : 0
-    tenant               = var.name
-    location             = var.region
+module "tenants" {
+    source               = "./modules/services/tenants"
+    prov                 = var.environment.cloudprovider
+    name                 = var.tenant
+    description          = var.tenant
+    status               = "Operational"
+    centercode           = var.environment.centercode
+    change               = var.environment.change
+    view                 = var.environment.view
+    managementR          = var.environment.management-r
+    managementA          = var.environment.management-a
+    managementI          = var.environment.management-i
+    developer            = var.environment.developer
 }
 
-module "tenant_onprem" {
-    source               = "../AppCICD/modules/tenant_onprem"
-    count                = var.prov == "onprem" ? 1 : 0
-    name                 = var.name
-    party                = var.name
+module "applications" {
+    source               = "./modules/services/applications"
+    prov                 = var.environment.cloudprovider
+    name                 = var.tenant
+    description          = var.tenant
+    tenant               = var.tenant
+    status               = "Operational"
+    centercode           = var.environment.centercode
+    change               = var.environment.change
+    view                 = var.environment.view
+    managementR          = var.environment.management-r
+    managementA          = var.environment.management-a
+    managementI          = var.environment.management-i
+    developer            = var.environment.developer
 }
+
