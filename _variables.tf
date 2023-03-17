@@ -13,12 +13,12 @@ variable "prov" {
 
 variable "environment" {
     type    = object ({
-        e-type                = string, 
+        etype               = string, 
         cloudprovider       = string,
         region              = string,
         availability_zone   = string,
         name                = string,
-        version             = string,
+        eversion            = string,
         created             = string,
         updated             = string,
         last_change         = string,

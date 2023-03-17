@@ -3569,7 +3569,7 @@ definitions:
       id: 1
       name: Development
       description: Development environment MyApp
-      type: DEV
+      e-type: DEV
       cloudprovider: OnPrem
       region: Primary
       availabilityzone: Pod1
@@ -3601,7 +3601,7 @@ definitions:
         example: Some Environment somewhere
         minLength: 1
         type: string
-      type:
+      etype:
         description: Purpose of the environment
         type: string
         example: "DEV" 
@@ -3625,15 +3625,19 @@ definitions:
         example: EU-West
         minLength: 1
         type: string
+      application:
+        description: Application name
+        minLength: 1
+        type: string
       availabilityzone:
         description: Description of az of the cloudprovider
         minLength: 1
         type: string
-      version:
+      eversion:
         description: Description of the version of this environment
         minLength: 1
         type: string
-      status:
+      estatus:
         description: Status of environment
         example: Operational
         type: string
@@ -3695,12 +3699,13 @@ definitions:
     required:
     - name
     - description
-    - type
+    - etype
     - cloudprovider
     - region
     - availabilityzone
-    - version
-    - status
+    - application
+    - eversion
+    - estatus
     - change
     - view
     - responsible
