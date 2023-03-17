@@ -1,7 +1,3 @@
-variable "prov" {
-    type    = string
-}
-
 variable "name" {
     type    = string
 }
@@ -10,19 +6,27 @@ variable "description" {
     type    = string
 }
 
-variable "ctype" {
+variable "compartment" {
     type    = string
 }
 
-variable "environment" {
+variable "size" {
     type    = string
 }
 
-variable "cversion" {
+variable "serverrole" {
     type    = string
 }
 
-variable "cstatus" {
+variable "image" {
+    type    = string
+}
+
+variable "sversion" {
+    type    = string
+}
+
+variable "sstatus" {
     type    = string
 }
 
@@ -51,13 +55,5 @@ variable "managementI" {
 }
 
 variable "developer" {
-    type    = string
-}
-
-variable "numofservers" {
-    type    = number
-}
-
-variable "addressing" {
     type    = string
 }

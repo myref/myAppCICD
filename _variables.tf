@@ -37,7 +37,6 @@ variable "compartments" {
             name                = string,
             description         = string,
             ctype               = string,
-            vdc                 = string,
             cversion            = string,
             cstatus             = string,
             environment         = string,
@@ -52,7 +51,7 @@ variable "compartments" {
             management-i        = string,
             developer           = string,
             numofservers        = number,
-            addressing           = string
+            addressing          = string
             })            
         )
          
@@ -65,18 +64,19 @@ variable "servers" {
             compartment         = string,
             size                = string,
             serverrole          = string,
-            OS                  = string,
-            version             = string,
+            image               = string,
+            sversion            = string,
+            sstatus             = string,
             created             = string,
             updated             = string,
             last_change         = string,
-            Centercode          = string,
-            Change              = string,
-            View                = string,
-            Management-r        = string,
-            Management-a        = string,
-            Management-i        = string,
-            Developer           = string
+            centercode          = string,
+            change              = string,
+            view                = string,
+            management-r        = string,
+            management-a        = string,
+            management-i        = string,
+            developer           = string
         })
     )
 }

@@ -3901,21 +3901,28 @@ definitions:
         example: "Betaler" 
         minLength: 1
         type: string
-      cp:
+      compartment:
         description: Name of the Compartment
         example: "AP01" 
         minLength: 1
         type: string
+      serverrole:
+        description: Role of the server
+        example: "Webserver"
+        type: string
       size:
         description: Size of the server
         example: "XL"
-        readOnly: true
         type: string
       image:
-        description: The ID of the OS
+        description: The type of the image
         example: 1
-        type: integer
-      status:
+        type: string
+      sversion:
+        description: Description of the version of this environment
+        minLength: 1
+        type: string
+      sstatus:
         description: Status of server
         example: Operational
         type: string
@@ -3976,7 +3983,7 @@ definitions:
         type: string
     required:
     - name
-    - status
+    - sstatus
     - change
     - view
     - responsible

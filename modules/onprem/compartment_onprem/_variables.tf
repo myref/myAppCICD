@@ -10,10 +10,6 @@ variable "ctype" {
     type    = string
 }
 
-variable "vdc" {
-    type    = string
-}
-
 variable "cversion" {
     type    = string
 }

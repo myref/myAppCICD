@@ -65,7 +65,6 @@ module "compartments" {
     name                 = each.value.name
     description          = each.value.description
     ctype                = each.value.ctype
-    vdc                  = each.value.vdc
     cversion             = each.value.cversion
     cstatus              = each.value.cstatus
     environment          = var.environment.name
@@ -82,6 +81,29 @@ module "compartments" {
     depends_on = [
     module.environments
     ]
-
 }
 
+module "servers" {
+    source               = "./modules/services/servers"
+    prov                 = var.environment.cloudprovider
+    for_each             = var.servers
+    name                 = each.value.name
+    description          = each.value.description
+    compartment          = each.value.compartment
+    size                 = each.value.size
+    serverrole           = each.value.serverrole
+    image                = each.value.image
+    sversion             = each.value.sversion
+    sstatus              = each.value.sstatus
+    centercode           = each.value.centercode
+    change               = each.value.change
+    view                 = each.value.view
+    managementR          = each.value.management-r
+    managementA          = each.value.management-a
+    managementI          = each.value.management-i
+    developer            = each.value.developer
+
+    depends_on = [
+    module.compartments
+    ]
+}
