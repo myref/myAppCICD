@@ -18,7 +18,7 @@ module "applications" {
     prov                 = var.environment.cloudprovider
     name                 = var.tenant
     description          = var.tenant
-    tenant               = var.tenant
+    apptenant            = module.tenants.id
     status               = "Operational"
     centercode           = var.environment.centercode
     change               = var.environment.change
@@ -42,7 +42,7 @@ module "environments" {
     cloudprovider        = var.environment.cloudprovider
     region               = var.environment.region
     az                   = var.environment.availability_zone
-    application          = var.application
+    application          = module.applications.id
     eversion             = var.environment.eversion
     estatus              = "Operational"
     centercode           = var.environment.centercode

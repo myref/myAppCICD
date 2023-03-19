@@ -6,7 +6,7 @@ variable "description" {
     type    = string
 }
 
-variable "tenant" {
+variable "apptenant" {
     type    = string
 }
 

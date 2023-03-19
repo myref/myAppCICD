@@ -1,7 +1,7 @@
 resource "onprem_applications" "application" {
   name                    = var.name
   description             = var.description
-  tenant                  = var.name
+  tenant                  = var.apptenant
   status                  = var.status
   centercode              = var.centercode
   change                  = var.change

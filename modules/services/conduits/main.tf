@@ -1,10 +1,13 @@
-module "application_onprem" {
-    source               = "../../onprem/application_onprem"
+module "conduit_onprem" {
+    source               = "../../onprem/conduit_onprem"
     count                = var.prov == "OnPrem" ? 1 : 0
     name                 = var.name
     description          = var.description
-    apptenant            = var.apptenant
-    status               = var.status
+    ftype                = var.ftype
+    fsource              = var.fsource
+    fdestination         = var.fdestination
+    fversion             = var.fversion
+    fstatus              = var.fstatus
     centercode           = var.centercode
     change               = var.change
     view                 = var.view

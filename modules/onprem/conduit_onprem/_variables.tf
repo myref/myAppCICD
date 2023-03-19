@@ -1,7 +1,3 @@
-variable "prov" {
-    type    = string
-}
-
 variable "name" {
     type    = string
 }
@@ -10,27 +6,23 @@ variable "description" {
     type    = string
 }
 
-variable "compartment" {
+variable "ftype" {
     type    = string
 }
 
-variable "size" {
+variable "fsource" {
+    type    = map
+}
+
+variable "fdestination" {
+    type    = map
+}
+
+variable "fversion" {
     type    = string
 }
 
-variable "serverrole" {
-    type    = string
-}
-
-variable "image" {
-    type    = string
-}
-
-variable "sversion" {
-    type    = string
-}
-
-variable "sstatus" {
+variable "fstatus" {
     type    = string
 }
 

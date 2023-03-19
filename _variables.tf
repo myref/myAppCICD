@@ -82,39 +82,7 @@ variable "servers" {
 }
 
 variable "conduits" {
-    type    = map(object ({
-                name                = string, 
-                description         = string,
-                f-type              = string,
-                source              = map(object ({
-                    cloudprovider       = string,
-                    region              = string,
-                    availability_zone   = string,
-                    application         = string,
-                    environment         = string,
-                    compartment         = string
-                })),
-                destination          = map(object ({
-                    cloudprovider       = string,
-                    region              = string,
-                    availability_zone   = string,
-                    application         = string,
-                    environment         = string,
-                    compartment         = string
-                })),
-                version             = string,
-                created             = string,
-                updated             = string,
-                last_change         = string,
-                Centercode          = string,
-                Change              = string,
-                View                = string,
-                Management-r        = string,
-                Management-a        = string,
-                Management-i        = string,
-                Developer           = string
-        })
-    )
+    type    = object ({})
 }
 
 variable "databases" {
