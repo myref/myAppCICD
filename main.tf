@@ -67,7 +67,7 @@ module "compartments" {
     ctype                = each.value.ctype
     cversion             = each.value.cversion
     cstatus              = each.value.cstatus
-    environment          = var.environment.name
+    environment          = module.environments.id
     centercode           = each.value.centercode
     change               = each.value.change
     view                 = each.value.view

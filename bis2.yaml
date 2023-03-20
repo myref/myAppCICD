@@ -15,13 +15,11 @@ externalDocs:
   description: 'For information on the services, see the portal'
   url: 'https://restportal.services.provider.test/portfolio'
 schemes:
-- "https"
+- "http"
 consumes:
 - application/json
-- application/xml
 produces:
 - application/json
-- application/xml
 responses:
   InternalServerError:
     description: Internal Server Error
@@ -71,11 +69,6 @@ tags:
   externalDocs:
     description: TS
     url: 'https://provportal.provider.test/portfolio'
-- name: az
-  description: Hosting environment for applications.
-  externalDocs:
-    description: TS
-    url: 'https://provportal.provider.test/portfolio'
 - name: application
   description: Attachment point for environments.
   externalDocs:
@@ -116,9 +109,7 @@ paths:
       operationId: addTenant
       consumes:
       - application/json
-      - application/xml
       produces:
-      - application/xml
       - application/json
       parameters:
       - in: body
@@ -201,10 +192,7 @@ paths:
               type: string
           schema:
             $ref: '#/definitions/error'
-      security:
-      - bisportal_auth:
-        - 'write:tenant'
-        - 'read:tenant'
+
   /tenants/{tenant_id}:
     get:
       tags:
@@ -213,7 +201,6 @@ paths:
       description: Return a single tenant
       operationId: getTenantById
       produces:
-      - application/xml
       - application/json
       parameters:
       - name: tenant_id
@@ -292,8 +279,7 @@ paths:
               type: string         
           schema:
             $ref: '#/definitions/error'
-      security:
-      - api_key: []
+
     put:
       tags:
       - tenant
@@ -302,9 +288,7 @@ paths:
       operationId: updateTenant
       consumes:
       - application/json
-      - application/xml
       produces:
-      - application/xml
       - application/json
       parameters:
       - name: tenant_id
@@ -383,10 +367,7 @@ paths:
               type: string
           schema:
             $ref: '#/definitions/error'
-      security:
-      - bisportal_auth:
-        - 'write:tenant'
-        - 'read:tenant'
+
     delete:
       tags:
       - tenant
@@ -394,7 +375,6 @@ paths:
       description: Remove a tenant.
       operationId: deleteTenant
       produces:
-      - application/xml
       - application/json
       parameters:
       - name: tenant_id
@@ -473,388 +453,6 @@ paths:
               type: string
           schema:
             $ref: '#/definitions/error'
-      security:
-      - bisportal_auth:
-        - 'write:tenant'
-        - 'read:tenant'
-  /azs:
-    post:
-      tags:
-      - az
-      summary: Add an AZ
-      description: Add an AZ
-      operationId: addAZ
-      consumes:
-      - application/json
-      - application/xml
-      produces:
-      - application/xml
-      - application/json
-      parameters:
-      - description: Add an AZ
-        in: body
-        name: body
-        required: true
-        schema:
-          $ref: '#/definitions/az'
-      responses:
-        "201":
-          description: Created
-          headers:
-            Location:
-              type: string
-              format: url
-            Date: 
-              type: string
-              format: date
-            TrackingId: 
-              type: string
-              format: uuid
-            Cache-Control:
-              default:  "max-age=0, no-cache, no-store"
-              type: string
-          schema:
-            $ref: '#/definitions/az'
-        "400":
-          description: Bad Request
-          headers:
-            Date: 
-              type: string
-              format: date
-            TrackingId: 
-              type: string
-              format: uuid
-            Cache-Control:
-              default:  "max-age=0, no-cache, no-store"
-              type: string
-          schema:
-            $ref: '#/definitions/error'
-        "401":
-          description: Unauthorized
-          headers:
-            Date: 
-              type: string
-              format: date
-            TrackingId: 
-              type: string
-              format: uuid
-            Cache-Control:
-              default:  "max-age=0, no-cache, no-store"
-              type: string
-          schema:
-            $ref: '#/definitions/error'
-        "403":
-          description: Forbidden
-          headers:
-            Date: 
-              type: string
-              format: date
-            TrackingId: 
-              type: string
-              format: uuid
-            Cache-Control:
-              default:  "max-age=0, no-cache, no-store"
-              type: string
-          schema:
-            $ref: '#/definitions/error'
-        "500":
-          description: Internal Server Error
-          headers:
-            Date: 
-              type: string
-              format: date
-            TrackingId: 
-              type: string
-              format: uuid
-            Cache-Control:
-              default:  "max-age=0, no-cache, no-store"
-              type: string
-          schema:
-            $ref: '#/definitions/error'
-      security:
-      - bisportal_auth:
-        - 'write:az'
-        - 'read:az'
-  /azs/{id}:
-    get:
-      tags:
-      - az
-      summary: Find AZ on ID.
-      description: Returns a single AZ
-      operationId: getAZById
-      produces:
-      - application/xml
-      - application/json
-      parameters:
-      - description: Find AZ on ID.
-        in: path
-        name: id
-        required: true
-        type: integer
-        schema:
-          $ref: '#/definitions/az'
-      responses:
-        "200":
-          description: OK
-          headers:
-            Date: 
-              type: string
-              format: date
-            TrackingId: 
-              type: string
-              format: uuid
-            Cache-Control:
-              default:  "private, max-age=43200, must-revalidate"
-              type: string
-          schema:
-            $ref: '#/definitions/az'
-        "401":
-          description: Unauthorized
-          headers:
-            Date: 
-              type: string
-              format: date
-            TrackingId: 
-              type: string
-              format: uuid
-            Cache-Control:
-              default:  "max-age=0, no-cache, no-store"
-              type: string  
-          schema:
-            $ref: '#/definitions/error'
-        "403":
-          description: Forbidden
-          headers:
-            Date: 
-              type: string
-              format: date
-            TrackingId: 
-              type: string
-              format: uuid
-            Cache-Control:
-              default:  "max-age=0, no-cache, no-store"
-              type: string
-          schema:
-            $ref: '#/definitions/error'
-        "404":
-          description: Not Found
-          headers:
-            Date: 
-              type: string
-              format: date
-            TrackingId: 
-              type: string
-              format: uuid
-            Cache-Control:
-              default:  "max-age=0, no-cache, no-store"
-              type: string              
-          schema:
-            $ref: '#/definitions/error'
-        "500":
-          description: Internal Server Error
-          headers:
-            Date: 
-              type: string
-              format: date
-            TrackingId: 
-              type: string
-              format: uuid
-            Cache-Control:
-              default:  "max-age=0, no-cache, no-store"
-              type: string         
-          schema:
-            $ref: '#/definitions/error'
-      security:
-      - api_key: []
-    put:
-      tags:
-      - az
-      summary: Edit an AZ
-      description: Edit an AZ.
-      operationId: updateAZ
-      consumes:
-      - application/json
-      - application/xml
-      produces:
-      - application/xml
-      - application/json
-      parameters:
-      - description: Edit an AZ.
-        in: body
-        name: payload
-        required: true      
-        schema:
-          $ref: '#/definitions/az'
-      responses:
-        "200":
-          description: OK
-          headers:
-            Date: 
-              type: string
-              format: date
-            TrackingId: 
-              type: string
-              format: uuid
-            Cache-Control:
-              default:  "max-age=0, no-cache, no-store"
-              type: string
-          schema:
-            $ref: '#/definitions/az'
-        "401":
-          description: Unauthorized
-          headers:
-            Date: 
-              type: string
-              format: date
-            TrackingId: 
-              type: string
-              format: uuid
-            Cache-Control:
-              default:  "max-age=0, no-cache, no-store"
-              type: string
-          schema:
-            $ref: '#/definitions/error'
-        "403":
-          description: Forbidden
-          headers:
-            Date: 
-              type: string
-              format: date
-            TrackingId: 
-              type: string
-              format: uuid
-            Cache-Control:
-              default:  "max-age=0, no-cache, no-store"
-              type: string
-          schema:
-            $ref: '#/definitions/error'
-        "404":
-          description: Not Found
-          headers:
-            Date: 
-              type: string
-              format: date
-            TrackingId: 
-              type: string
-              format: uuid
-            Cache-Control:
-              default:  "max-age=0, no-cache, no-store"
-              type: string
-          schema:
-            $ref: '#/definitions/error'
-        "500":
-          description: Internal Server Error
-          headers:
-            Date: 
-              type: string
-              format: date
-            TrackingId: 
-              type: string
-              format: uuid
-            Cache-Control:
-              default:  "max-age=0, no-cache, no-store"
-              type: string
-          schema:
-            $ref: '#/definitions/error'
-      security:
-      - bisportal_auth:
-        - 'write:az'
-        - 'read:az'
-    delete:
-      tags:
-      - az
-      summary: Remove an AZ.
-      description: Remove an AZ.
-      operationId: deleteAZ
-      produces:
-      - application/xml
-      - application/json
-      parameters:
-      - name: "api_key"
-        description: somekey
-        in: "header"
-        required: false
-        type: "string"
-      - name: id
-        description: ID of the AZ to be removed.
-        in: path
-        required: true
-        type: integer
-      responses:
-        "204":
-          description: No Content
-          headers:
-            Date: 
-              type: string
-              format: date
-            TrackingId: 
-              type: string
-              format: uuid
-            Cache-Control:
-              default:  "max-age=0, no-cache, no-store"
-              type: string
-          schema:
-            $ref: '#/definitions/az'
-        "401":
-          description: Unauthorized
-          headers:
-            Date: 
-              type: string
-              format: date
-            TrackingId: 
-              type: string
-              format: uuid
-            Cache-Control:
-              default:  "max-age=0, no-cache, no-store"
-              type: string
-          schema:
-            $ref: '#/definitions/error'
-        "403":
-          description: Forbidden
-          headers:
-            Date: 
-              type: string
-              format: date
-            TrackingId: 
-              type: string
-              format: uuid
-            Cache-Control:
-              default:  "max-age=0, no-cache, no-store"
-              type: string
-          schema:
-            $ref: '#/definitions/error'
-        "404":
-          description: Not Found
-          headers:
-            Date: 
-              type: string
-              format: date
-            TrackingId: 
-              type: string
-              format: uuid
-            Cache-Control:
-              default:  "max-age=0, no-cache, no-store"
-              type: string
-          schema:
-            $ref: '#/definitions/error'
-        "500":
-          description: Internal Server Error
-          headers:
-            Date: 
-              type: string
-              format: date
-            TrackingId: 
-              type: string
-              format: uuid
-            Cache-Control:
-              default:  "max-age=0, no-cache, no-store"
-              type: string
-          schema:
-            $ref: '#/definitions/error'
-      security:
-      - bisportal_auth:
-        - 'write:az'
-        - 'read:az'
   /applications:
     post:
       tags:
@@ -864,9 +462,7 @@ paths:
       operationId: addApplication
       consumes:
       - application/json
-      - application/xml
       produces:
-      - application/xml
       - application/json
       parameters:
       - description: Add an application 
@@ -949,10 +545,7 @@ paths:
               type: string
           schema:
             $ref: '#/definitions/error'
-      security:
-      - bisportal_auth:
-        - 'write:application'
-        - 'read:application'
+
   /applications/{id}:
     get:
       tags:
@@ -961,7 +554,6 @@ paths:
       description: Find application on ID.
       operationId: getApplicationById
       produces:
-      - application/xml
       - application/json
       parameters:
       - description: Find application on ID.
@@ -1040,8 +632,7 @@ paths:
               type: string         
           schema:
             $ref: '#/definitions/error'
-      security:
-      - api_key: []
+
     put:
       tags:
       - application
@@ -1050,17 +641,14 @@ paths:
       operationId: updateApplication
       consumes:
       - application/json
-      - application/xml
       produces:
-      - application/xml
       - application/json
       parameters:
-      - description: Edit an  application.
-        in: body
-        name: payload
-        required: true      
-        schema:
-          $ref: '#/definitions/application'
+      - description: Find application on ID.
+        in: path
+        name: id
+        required: true
+        type: integer
       responses:
         "200":
           description: OK
@@ -1132,10 +720,7 @@ paths:
               type: string
           schema:
             $ref: '#/definitions/error'
-      security:
-      - bisportal_auth:
-        - 'write:application'
-        - 'read:application'
+
     delete:
       tags:
       - application
@@ -1143,7 +728,6 @@ paths:
       description: Verwijderen of een application.
       operationId: deleteApplication
       produces:
-      - application/xml
       - application/json
       parameters:
       - name: "api_key"
@@ -1227,10 +811,7 @@ paths:
               type: string
           schema:
             $ref: '#/definitions/error'
-      security:
-      - bisportal_auth:
-        - 'write:application'
-        - 'read:application'
+
   /environments:
     post:
       tags:
@@ -1240,9 +821,7 @@ paths:
       operationId: addEnvironment
       consumes:
       - application/json
-      - application/xml
       produces:
-      - application/xml
       - application/json
       parameters:
       - description: Add an environment
@@ -1325,10 +904,7 @@ paths:
               type: string
           schema:
             $ref: '#/definitions/error'
-      security:
-      - bisportal_auth:
-        - 'write:environment'
-        - 'read:environment'
+
   /environments/{id}:
     get:
       tags:
@@ -1337,7 +913,6 @@ paths:
       description: Returns environment.
       operationId: getEnvironmentById
       produces:
-      - application/xml
       - application/json
       parameters:
       - description: Environment to be found.
@@ -1416,8 +991,7 @@ paths:
               type: string         
           schema:
             $ref: '#/definitions/error'
-      security:
-      - api_key: []
+
     put:
       tags:
       - environment
@@ -1426,17 +1000,14 @@ paths:
       operationId: updateEnvironment
       consumes:
       - application/json
-      - application/xml
       produces:
-      - application/xml
       - application/json
       parameters:
-      - description: Environment to be edited.
-        in: body
-        name: payload
-        required: true      
-        schema:
-          $ref: '#/definitions/environment'
+      - description: Environment to be found.
+        in: path
+        name: id
+        required: true
+        type: integer
       responses:
         "200":
           description: OK
@@ -1508,10 +1079,7 @@ paths:
               type: string
           schema:
             $ref: '#/definitions/error'
-      security:
-      - bisportal_auth:
-        - 'write:environment'
-        - 'read:environment'
+
     delete:
       tags:
       - environment
@@ -1519,7 +1087,6 @@ paths:
       description: Delete an environment.
       operationId: deleteEnvironment
       produces:
-      - application/xml
       - application/json
       parameters:
       - name: "api_key"
@@ -1603,10 +1170,7 @@ paths:
               type: string
           schema:
             $ref: '#/definitions/error'
-      security:
-      - bisportal_auth:
-        - 'write:environment'
-        - 'read:environment'
+
   /compartments:
     post:
       tags:
@@ -1616,9 +1180,7 @@ paths:
       operationId: addCompartment
       consumes:
       - application/json
-      - application/xml
       produces:
-      - application/xml
       - application/json
       parameters:
       - description: Add an compartment
@@ -1702,10 +1264,6 @@ paths:
           schema:
             $ref: '#/definitions/error'
 
-      security:
-      - bisportal_auth:
-        - 'write:compartment'
-        - 'read:compartment'
   /compartments/{id}:
     get:
       tags:
@@ -1714,7 +1272,6 @@ paths:
       description: Returns compartment.
       operationId: getCompartmentById
       produces:
-      - application/xml
       - application/json
       parameters:
       - description: Compartment to be found.
@@ -1793,8 +1350,7 @@ paths:
               type: string         
           schema:
             $ref: '#/definitions/error'
-      security:
-      - api_key: []
+
     put:
       tags:
       - compartment
@@ -1803,17 +1359,14 @@ paths:
       operationId: updateCompartment
       consumes:
       - application/json
-      - application/xml
       produces:
-      - application/xml
       - application/json
       parameters:
-      - description: Compartment to be edited.
-        in: body
-        name: payload
-        required: true      
-        schema:
-          $ref: '#/definitions/compartment'
+      - description: Compartment to be found.
+        in: path
+        name: id
+        required: true
+        type: integer
       responses:
         "200":
           description: OK
@@ -1885,10 +1438,7 @@ paths:
               type: string
           schema:
             $ref: '#/definitions/error'
-      security:
-      - bisportal_auth:
-        - 'write:compartment'
-        - 'read:compartment'
+
     delete:
       tags:
       - compartment
@@ -1896,7 +1446,6 @@ paths:
       description: Delete an compartment.
       operationId: deleteCompartment
       produces:
-      - application/xml
       - application/json
       parameters:
       - name: "api_key"
@@ -1980,10 +1529,7 @@ paths:
               type: string
           schema:
             $ref: '#/definitions/error'
-      security:
-      - bisportal_auth:
-        - 'write:compartment'
-        - 'read:compartment'
+
   /servers:
     post:
       tags:
@@ -1993,9 +1539,7 @@ paths:
       operationId: addServer
       consumes:
       - application/json
-      - application/xml
       produces:
-      - application/xml
       - application/json
       parameters:
       - in: body
@@ -2078,10 +1622,7 @@ paths:
               type: string
           schema:
             $ref: '#/definitions/error'
-      security:
-      - bisportal_auth:
-        - 'write:server'
-        - 'read:server'
+
   /servers/{id}:
     get:
       tags:
@@ -2090,7 +1631,6 @@ paths:
       description: Returns single Server
       operationId: getServerById
       produces:
-      - application/xml
       - application/json
       parameters:
       - name: id
@@ -2169,8 +1709,7 @@ paths:
               type: string         
           schema:
             $ref: '#/definitions/error'
-      security:
-      - api_key: []
+
     put:
       tags:
       - server
@@ -2179,17 +1718,14 @@ paths:
       operationId: updateServer
       consumes:
       - application/json
-      - application/xml
       produces:
-      - application/xml
       - application/json
       parameters:
-      - description: Server to be edited.
-        in: body
-        name: payload
-        required: true      
-        schema:
-          $ref: '#/definitions/server'
+      - name: id
+        description: Server to be found.
+        in: path
+        required: true
+        type: integer
       responses:
         "200":
           description: OK
@@ -2261,10 +1797,7 @@ paths:
               type: string
           schema:
             $ref: '#/definitions/error'
-      security:
-      - bisportal_auth:
-        - 'write:server'
-        - 'read:server'
+
     delete:
       tags:
       - server
@@ -2272,7 +1805,6 @@ paths:
       description: Verwijderen of een server.
       operationId: deleteServer
       produces:
-      - application/xml
       - application/json
       parameters:
       - name: "api_key"
@@ -2356,10 +1888,7 @@ paths:
               type: string
           schema:
             $ref: '#/definitions/error'
-      security:
-      - bisportal_auth:
-        - 'write:server'
-        - 'read:server'
+
   /images:
     post:
       tags:
@@ -2369,9 +1898,7 @@ paths:
       operationId: addImage
       consumes:
       - application/json
-      - application/xml
       produces:
-      - application/xml
       - application/json
       parameters:
       - description: Image wat beschikbaar wordt gesteld in the datacenter.
@@ -2455,10 +1982,6 @@ paths:
           schema:
             $ref: '#/definitions/error'
 
-      security:
-      - bisportal_auth:
-        - 'write:image'
-        - 'read:image'
   /images/{id}:
     get:
       tags:
@@ -2467,7 +1990,6 @@ paths:
       description: Returns single image
       operationId: getImageById
       produces:
-      - application/xml
       - application/json
       parameters:
       - description: Image to be found
@@ -2546,8 +2068,7 @@ paths:
               type: string         
           schema:
             $ref: '#/definitions/error'
-      security:
-      - api_key: []
+
     put:
       tags:
       - image
@@ -2556,17 +2077,14 @@ paths:
       operationId: updateImage
       consumes:
       - application/json
-      - application/xml
       produces:
-      - application/xml
       - application/json
       parameters:
-      - description: Image wat moet worden edited.
-        in: body
-        name: payload
-        required: true      
-        schema:
-          $ref: '#/definitions/image'
+      - description: Image to be found
+        in: path
+        name: id
+        required: true
+        type: integer
       responses:
         "200":
           description: OK
@@ -2638,10 +2156,7 @@ paths:
               type: string
           schema:
             $ref: '#/definitions/error'
-      security:
-      - bisportal_auth:
-        - 'write:image'
-        - 'read:image'
+
     delete:
       tags:
       - image
@@ -2649,7 +2164,6 @@ paths:
       description: Verwijderen of een image.
       operationId: deleteImage
       produces:
-      - application/xml
       - application/json
       parameters:
       - name: "api_key"
@@ -2733,10 +2247,7 @@ paths:
               type: string
           schema:
             $ref: '#/definitions/error'
-      security:
-      - bisportal_auth:
-        - 'write:image'
-        - 'read:image'
+
   /conduits:
     post:
       tags:
@@ -2746,9 +2257,7 @@ paths:
       operationId: addConduit
       consumes:
       - application/json
-      - application/xml
       produces:
-      - application/xml
       - application/json
       parameters:
       - description: "Unidirectional data path"
@@ -2832,10 +2341,6 @@ paths:
           schema:
             $ref: '#/definitions/error'
 
-      security:
-      - bisportal_auth:
-        - 'write:conduit'
-        - 'read:conduit'
   /conduits/{id}:
     get:
       tags:
@@ -2844,7 +2349,6 @@ paths:
       description: Returns single conduit
       operationId: getConduitById
       produces:
-      - application/xml
       - application/json
       parameters:
       - description: Conduit to be found
@@ -2923,8 +2427,7 @@ paths:
               type: string         
           schema:
             $ref: '#/definitions/error'
-      security:
-      - api_key: []
+
     put:
       tags:
       - conduit
@@ -2933,17 +2436,14 @@ paths:
       operationId: updateConduit
       consumes:
       - application/json
-      - application/xml
       produces:
-      - application/xml
       - application/json
       parameters:
-      - description: Change a conduit.
-        in: body
-        name: payload
-        required: true      
-        schema:
-          $ref: '#/definitions/conduit'
+      - description: Conduit to be found
+        in: path
+        name: id
+        required: true
+        type: integer
       responses:
         "200":
           description: OK
@@ -3015,10 +2515,7 @@ paths:
               type: string
           schema:
             $ref: '#/definitions/error'
-      security:
-      - bisportal_auth:
-        - 'write:conduit'
-        - 'read:conduit'
+
     delete:
       tags:
       - conduit
@@ -3026,7 +2523,6 @@ paths:
       description: Delete a conduit.
       operationId: deleteConduit
       produces:
-      - application/xml
       - application/json
       parameters:
       - name: "api_key"
@@ -3110,10 +2606,6 @@ paths:
               type: string
           schema:
             $ref: '#/definitions/error'
-      security:
-      - bisportal_auth:
-        - 'write:conduit'
-        - 'read:conduit'
 
 definitions:
   error:
@@ -3864,6 +3356,7 @@ definitions:
     example:
       id: 1
       name: Frontend
+      inventory_hostname: Frontend
       description: Frontend server MyApp
       party: ACustomer
       env: Development
@@ -3891,6 +3384,11 @@ definitions:
         example: MyApp
         minLength: 1
         type: string
+      inventory_hostname:
+        description: Name of server
+        example: MyApp
+        minLength: 1
+        type: string
       description:
         description: Description of Server
         example: Some Server somewhere
@@ -3909,6 +3407,10 @@ definitions:
       serverrole:
         description: Role of the server
         example: "Webserver"
+        type: string
+      inventory_group_name:
+        description: Role of the server
+        example: ["Webserver"]
         type: string
       size:
         description: Size of the server

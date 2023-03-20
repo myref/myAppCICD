@@ -1,9 +1,11 @@
 resource "onprem_servers" "server" {
   name                    = var.name
+  inventory_hostname      = var.name
   description             = var.description
   compartment             = var.compartment
   size                    = var.size
   serverrole              = var.serverrole
+  inventory_group_name    = var.serverrole
   image                   = var.image
   sversion                = var.sversion
   sstatus                 = var.sstatus
