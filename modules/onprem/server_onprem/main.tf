@@ -17,3 +17,13 @@ resource "onprem_servers" "server" {
   inform                  = var.managementI
   developer               = var.developer
 }
+
+resource "ansible_host" "instance" {
+  inventory_hostname = var.name
+  groups             = [var.serverrole]
+
+  vars = {
+    ansible_user       = "admin"
+    hostname           = var.name
+  }
+}
